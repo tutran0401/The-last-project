@@ -90,7 +90,7 @@
                                                         <%--                                                        <input type="text" class="form-control" id="ward" name="ward"--%>
                                                         <%--                                                               value="${modelSearch.ward}">--%>
                                                     <form:input class="form-control" path="ward"/>
-
+<%--them commit--%>
                                                 </div>
                                                 <div class="col-xs-5">
                                                     <label class="name"> Đường </label>
