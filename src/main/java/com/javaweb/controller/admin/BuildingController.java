@@ -52,11 +52,14 @@ public class BuildingController {
         mav.addObject("listStaffs",userService.getStaffs());
         mav.addObject("districts", districtCode.type());
         mav.addObject("typeCodes", buildingType.type());
+        System.out.println("typeCodes = " + buildingType.type());
         return mav;
     }
     @RequestMapping(value = "/admin/building-edit",method = RequestMethod.GET)
     public ModelAndView buildingEdit(@ModelAttribute("buildingEdit") BuildingDTO buildingDTO,HttpServletRequest request){
         ModelAndView mav = new ModelAndView("admin/builiding/edit");
+        mav.addObject("districts", districtCode.type());
+     mav.addObject("typeCodes", buildingType.type());
         return mav;
     }
     @RequestMapping(value = "/admin/building-edit-{id}",method = RequestMethod.GET)
@@ -65,6 +68,8 @@ public class BuildingController {
         BuildingDTO buildingDTO = new BuildingDTO();
         buildingDTO.setName("TU building");
         mav.addObject("buildingEdit",buildingDTO);
+        mav.addObject("districts", districtCode.type());
+        mav.addObject("typeCodes", buildingType.type());
         return mav;
     }
 

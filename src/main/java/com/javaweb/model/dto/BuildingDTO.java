@@ -14,22 +14,6 @@ public class BuildingDTO extends AbstractDTO {
     private Long numberOfBasement;
     private Long floorArea;
 
-    public Long getAreaFrom() {
-        return areaFrom;
-    }
-
-    public void setAreaFrom(Long areaFrom) {
-        this.areaFrom = areaFrom;
-    }
-
-    public Long getAreaTo() {
-        return areaTo;
-    }
-
-    public void setAreaTo(Long areaTo) {
-        this.areaTo = areaTo;
-    }
-
     private Long areaFrom;
 
     private Long areaTo;
@@ -62,6 +46,22 @@ public class BuildingDTO extends AbstractDTO {
 
     public Map<String, String> getBuildingDTOs() {
         return buildingDTOs;
+    }
+
+    public Long getAreaFrom() {
+        return areaFrom;
+    }
+
+    public void setAreaFrom(Long areaFrom) {
+        this.areaFrom = areaFrom;
+    }
+
+    public Long getAreaTo() {
+        return areaTo;
+    }
+
+    public void setAreaTo(Long areaTo) {
+        this.areaTo = areaTo;
     }
 
     public String getNote() {

@@ -64,8 +64,8 @@
                                             <div class="col-xs-12">
                                                 <div class="col-xs-6">
                                                     <label class="name"> Tên tòa nhà </label>
-                                                        <%--                                                        <input type="text" class="form-control" id="name" name="name"--%>
-                                                        <%--                                                               value="${modelSearch.name}">--%>
+                                                        <%--              <input type="text" class="form-control" id="name" name="name"--%>
+                                                        <%--              value="${modelSearch.name}">--%>
                                                     <form:input class="form-control" path="name"/>
                                                 </div>
                                                 <div class="col-xs-6">
