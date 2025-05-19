@@ -176,21 +176,22 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <div class="col-xs-6">
-                                                    <label class="checkbox-inline">
-                                                        <input name="typeCode" type="checkbox" value="noi-that">
-                                                        Nội
-                                                        thất
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                        <input name="typeCode" type="checkbox"
-                                                               value="nguyen-can">
-                                                        Nguyên căn
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                        <input name="typeCode" type="checkbox"
-                                                               value="tang-tret">
-                                                        Tầng trệt
-                                                    </label>
+<%--                                                    <label class="checkbox-inline">--%>
+<%--                                                        <input name="typeCode" type="checkbox" value="noi-that">--%>
+<%--                                                        Nội--%>
+<%--                                                        thất--%>
+<%--                                                    </label>--%>
+<%--                                                    <label class="checkbox-inline">--%>
+<%--                                                        <input name="typeCode" type="checkbox"--%>
+<%--                                                               value="nguyen-can">--%>
+<%--                                                        Nguyên căn--%>
+<%--                                                    </label>--%>
+<%--                                                    <label class="checkbox-inline">--%>
+<%--                                                        <input name="typeCode" type="checkbox"--%>
+<%--                                                               value="tang-tret">--%>
+<%--                                                        Tầng trệt--%>
+<%--                                                    </label>--%>
+                                                    <form:checkboxes items="${typeCodes}" path="typeCode"/>
                                                 </div>
                                             </div>
                                         </div>

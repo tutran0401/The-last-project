@@ -2,6 +2,7 @@ package com.javaweb.controller.admin;
 
 
 
+import com.javaweb.enums.buildingType;
 import com.javaweb.enums.districtCode;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
@@ -50,6 +51,7 @@ public class BuildingController {
         mav.addObject("buildingList",responsesList);
         mav.addObject("listStaffs",userService.getStaffs());
         mav.addObject("districts", districtCode.type());
+        mav.addObject("typeCodes", buildingType.type());
         return mav;
     }
     @RequestMapping(value = "/admin/building-edit",method = RequestMethod.GET)
