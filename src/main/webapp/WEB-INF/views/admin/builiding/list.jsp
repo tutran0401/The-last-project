@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
-<%--<c:url var="buildingListURL" value="/admin/building-list"></c:url>--%>
+<c:url var="buildingListURL" value="/admin/building-list"></c:url>
+<c:url var="buildingAPI" value="/api/building"/>
 <html>
 <head>
     <title>Danh sách tòa nhà</title>
@@ -329,22 +330,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="center">
-                            <input type="checkbox" id="checkbox_1" value="1">
-                        </td>
-                        <td>
-                            Nguyễn Văn A
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="center">
-                            <input type="checkbox" id="checkbox_2" value="3">
-                        </td>
-                        <td>
-                            Trần Văn C
-                        </td>
-                    </tr>
+
                     </tbody>
                 </table>
                 <input type="hidden" id="buildingId" name="Buildiing" value="1">
@@ -360,6 +346,33 @@
 <script>
     function assignmentBuilding(buildingId) {
         $('#assignmentBuildingModal').modal();
+        loadStaff(buildingId);
+        $('buildingId').val();
+    }
+    function loadStaff(buildingId){
+        $.ajax({
+            type: "GET",
+            url: "${buildingAPI}/"+ buildingId + '/staffs',
+            // data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: "JSON",
+            success: function (response) {
+                var row='';
+                $.each(response.data,function (index,item) {
+                    row+='<tr>';
+                    row+= ' <td class="text-center"> <input type="checkbox" id="checkbox_1" value='+ item.staffId + "id=checkbox_1"+ item.staffId +item.checked + '/></td>'
+                    row+='<td className="text-center">' + item.fullName +'</td>';
+                    row+='</tr>';
+                });
+                $('#staffList tbody').html(row);
+                console.log("success");
+            },
+            error: function (response) {
+                console.log("fail");
+                window.location.href="<c:url value= "/admin/builiding-list?message=errro"/>";
+                console.log(respond);
+            }
+        });
     }
 
     $('#btnassignmentBuilding').click(function (e) {
@@ -392,7 +405,7 @@
     function deleteBuildings(data) {
         $.ajax({
             type: "DELETE",
-            url: "${buildingAPI}/{ids}",
+            url: "${buildingAPI}/"+data,
             data: JSON.stringify(data),
             contentType: "application/json",
             dataType: "JSON",

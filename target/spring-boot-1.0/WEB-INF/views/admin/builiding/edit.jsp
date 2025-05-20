@@ -225,6 +225,13 @@
         data['typeCode'] = typeCode;
         console.log("OK");
         // call api
+        if(typeCode!=''){
+            addOrUpdateBuilding(data);
+        }else {
+            window.location.href="/admin/building-edit?typeCode=require";
+        }
+    });
+    function addOrUpdateBuilding(data){
         $.ajax({
             type: "POST",
             url: "${buildingAPI}",
@@ -239,7 +246,8 @@
                 console.log(respond);
             }
         })
-    });
+    }
+
     $('#btnCancel').click(function () {
         window.location.href="/admin/builiding-list";
     });

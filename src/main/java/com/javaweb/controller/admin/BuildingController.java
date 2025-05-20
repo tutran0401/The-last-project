@@ -39,7 +39,7 @@ public class BuildingController {
         item1.setManagerPhone("091234567");
         item1.setRentArea("100,200,300");
         BuildingSearchResponse item2 = new BuildingSearchResponse();
-        item2.setId(3L);
+        item2.setId(4L);
         item2.setName("Mỹ Đình 2 towerr");
         item2.setAddress("Nhà 10c ngõ 392 mỹ đình 2");
         item2.setNumberOfBasement(3L);

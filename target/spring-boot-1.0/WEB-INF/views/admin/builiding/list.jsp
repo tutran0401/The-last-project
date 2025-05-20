@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
-<%--<c:url var="buildingListURL" value="/admin/building-list"></c:url>--%>
+<c:url var="buildingListURL" value="/admin/building-list"></c:url>
+<c:url var="buildingAPI" value="/api/building"/>
 <html>
 <head>
     <title>Danh sách tòa nhà</title>
@@ -90,7 +91,7 @@
                                                         <%--                                                        <input type="text" class="form-control" id="ward" name="ward"--%>
                                                         <%--                                                               value="${modelSearch.ward}">--%>
                                                     <form:input class="form-control" path="ward"/>
-<%--them commit--%>
+                                                        <%--them commit--%>
                                                 </div>
                                                 <div class="col-xs-5">
                                                     <label class="name"> Đường </label>
@@ -176,21 +177,21 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <div class="col-xs-6">
-<%--                                                    <label class="checkbox-inline">--%>
-<%--                                                        <input name="typeCode" type="checkbox" value="noi-that">--%>
-<%--                                                        Nội--%>
-<%--                                                        thất--%>
-<%--                                                    </label>--%>
-<%--                                                    <label class="checkbox-inline">--%>
-<%--                                                        <input name="typeCode" type="checkbox"--%>
-<%--                                                               value="nguyen-can">--%>
-<%--                                                        Nguyên căn--%>
-<%--                                                    </label>--%>
-<%--                                                    <label class="checkbox-inline">--%>
-<%--                                                        <input name="typeCode" type="checkbox"--%>
-<%--                                                               value="tang-tret">--%>
-<%--                                                        Tầng trệt--%>
-<%--                                                    </label>--%>
+                                                        <%--                                                    <label class="checkbox-inline">--%>
+                                                        <%--                                                        <input name="typeCode" type="checkbox" value="noi-that">--%>
+                                                        <%--                                                        Nội--%>
+                                                        <%--                                                        thất--%>
+                                                        <%--                                                    </label>--%>
+                                                        <%--                                                    <label class="checkbox-inline">--%>
+                                                        <%--                                                        <input name="typeCode" type="checkbox"--%>
+                                                        <%--                                                               value="nguyen-can">--%>
+                                                        <%--                                                        Nguyên căn--%>
+                                                        <%--                                                    </label>--%>
+                                                        <%--                                                    <label class="checkbox-inline">--%>
+                                                        <%--                                                        <input name="typeCode" type="checkbox"--%>
+                                                        <%--                                                               value="tang-tret">--%>
+                                                        <%--                                                        Tầng trệt--%>
+                                                        <%--                                                    </label>--%>
                                                     <form:checkboxes items="${typeCodes}" path="typeCode"/>
                                                 </div>
                                             </div>
@@ -227,7 +228,7 @@
                             </svg>
                         </button>
                     </a>
-                    <button class="btn btn-danger" title="xóa tòa nhà">
+                    <button class="btn btn-danger" title="xóa tòa nhà" id="btnDeleteBuilding">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-building-dash" viewBox="0 0 16 16">
                             <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1"/>
@@ -240,7 +241,7 @@
         </div>
         <!-- Bảng danh sách -->
         <div class="col-xs-12">
-            <table id="simple-table" style="margin: 3em 0 1.5em;"
+            <table id="tableList" style="margin: 3em 0 1.5em;"
                    class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
@@ -296,7 +297,8 @@
                                     <i class="ace-icon fa fa-pencil bigger-120"></i>
                                 </a>
 
-                                <button class="btn btn-xs btn-danger">
+                                <button class="btn btn-xs btn-danger" title="xoa toa nha"
+                                        onclick="deleteBuilding(${item.id})">
                                     <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                 </button>
                             </div>
@@ -328,22 +330,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="center">
-                            <input type="checkbox" id="checkbox_1" value="1">
-                        </td>
-                        <td>
-                            Nguyễn Văn A
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="center">
-                            <input type="checkbox" id="checkbox_2" value="3">
-                        </td>
-                        <td>
-                            Trần Văn C
-                        </td>
-                    </tr>
+
                     </tbody>
                 </table>
                 <input type="hidden" id="buildingId" name="Buildiing" value="1">
@@ -359,6 +346,33 @@
 <script>
     function assignmentBuilding(buildingId) {
         $('#assignmentBuildingModal').modal();
+        loadStaff(buildingId);
+        $('buildingId').val();
+    }
+    function loadStaff(buildingId){
+        $.ajax({
+            type: "GET",
+            url: "${buildingAPI}/"+ buildingId + '/staffs',
+            // data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: "JSON",
+            success: function (response) {
+                var row='';
+                $.each(response.data,function (index,item) {
+                    row+='<tr>';
+                    row+= ' <td class="text-center"> <input type="checkbox" id="checkbox_1" value='+ item.staffId + "id=checkbox_1"+ item.staffId +item.checked + '/></td>'
+                    row+='<td className="text-center">' + item.fullName +'</td>';
+                    row+='</tr>';
+                });
+                $('#staffList tbody').html(row);
+                console.log("success");
+            },
+            error: function (response) {
+                console.log("fail");
+                window.location.href="<c:url value= "/admin/builiding-list?message=errro"/>";
+                console.log(respond);
+            }
+        });
     }
 
     $('#btnassignmentBuilding').click(function (e) {
@@ -375,6 +389,35 @@
         e.preventDefault();
         $('#listForm').submit();
     });
+    $('#btnDeleteBuilding').click(function (e) {
+        e.preventDefault();
+        var buildingIds = $('#tableList').find('tbody input[type=checkbox]:checked').map(function () {
+            return $(this).val();
+        }).get();
+        deleteBuildings(buildingIds);
+    })
+
+    function deleteBuilding(id) {
+        var buildingId = [id];
+        deleteBuildings(buildingId);
+    };
+
+    function deleteBuildings(data) {
+        $.ajax({
+            type: "DELETE",
+            url: "${buildingAPI}/"+data,
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: "JSON",
+            success: function (respond) {
+                console.log("success");
+            },
+            error: function (respond) {
+                console.log("fail");
+                console.log(respond);
+            }
+        });
+    }
 </script>
 </body>
 </html>
