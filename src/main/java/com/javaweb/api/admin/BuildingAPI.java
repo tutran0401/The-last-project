@@ -1,5 +1,6 @@
 package com.javaweb.api.admin;
 
+import com.javaweb.model.dto.AssignmentBuildingDTO;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.response.ResponseDTO;
 import com.javaweb.service.IBuildingService;
@@ -28,5 +29,10 @@ public class BuildingAPI {
         ResponseDTO result = new ResponseDTO();
         result=buildingService.listStaffs(id);
         return result;
+    }
+    @PostMapping("/assigment")
+    public void updateAssigmentBuilding(@RequestBody AssignmentBuildingDTO assignmentBuildingDTO){
+        System.out.println("oke");
+
     }
 }

@@ -1,13 +1,14 @@
 package com.javaweb.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-
 @Entity
 @Table(name = "building")
-public class BuildingEntity {
+
+public class BuildingEntity extends BaseEntity
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,20 +22,38 @@ public class BuildingEntity {
     @Column(name = "ward")
     private String ward;
 
-//	@Column(name = "districtid")
-//    private Long districtid;
+    @Column(name = "district")
+    private String district;
+
+    @Column(name = "structure")
+    private String structure;
+
+    @Column(name = "numberofbasement")
+    private Long numberOfBasement;
 
     @Column(name = "floorarea")
     private Long floorArea;
 
+    @Column(name = "direction")
+    private String direction;
+
+    @Column(name = "level")
+    private String level;
+
     @Column(name = "rentprice")
     private Long rentPrice;
 
+    @Column(name = "rentpricedescription")
+    private String rentPriceDescription;
+
     @Column(name = "servicefee")
-    private String serviceFee;
+    private Long serviceFee;
 
     @Column(name = "brokeragefee")
     private Long brokerageFee;
+
+    @Column(name = "type")
+    private String typeCode;
 
     @Column(name = "managername")
     private String managerName;
@@ -42,29 +61,19 @@ public class BuildingEntity {
     @Column(name = "managerphone")
     private String managerPhone;
 
-	@Column(name = "direction")
-	private String direction;
+//    @Column(name = "avatar")
+//    private String image;
 
-	@Column(name = "level")
-	private String level;
-//     @OneToMany(fetch = FetchType.LAZY,mappedBy = "buildingEntity")
-//     List<AssignmentBuildingEntity> assignBuildingEntities = new ArrayList<>();
-    @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.REMOVE,CascadeType.MERGE})
+    @OneToMany(mappedBy = "buildingId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RentAreaEntity> rentAreaEntities = new ArrayList<>();
+
+    @ManyToMany
     @JoinTable(name = "assignmentbuilding",
-                joinColumns = @JoinColumn(name = "buildingid",nullable = false),
-                inverseJoinColumns = @JoinColumn(name = "staffid",nullable = false))
+            joinColumns = @JoinColumn(name = "buildingid", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "staffid", nullable = false))
     private List<UserEntity> userEntities = new ArrayList<>();
 
-    public List<UserEntity> getUserEntities() {
-        return userEntities;
-    }
-
-    public void setUserEntities(List<UserEntity> userEntities) {
-        this.userEntities = userEntities;
-    }
-
-
-    // Getter & Setter cho id
+    @Override
     public Long getId() {
         return id;
     }
@@ -73,7 +82,14 @@ public class BuildingEntity {
         this.id = id;
     }
 
-    // Getter & Setter cho name
+    public String getRentPriceDescription() {
+        return rentPriceDescription;
+    }
+
+    public void setRentPriceDescription(String rentPriceDescription) {
+        this.rentPriceDescription = rentPriceDescription;
+    }
+
     public String getName() {
         return name;
     }
@@ -82,7 +98,6 @@ public class BuildingEntity {
         this.name = name;
     }
 
-    // Getter & Setter cho street
     public String getStreet() {
         return street;
     }
@@ -91,7 +106,6 @@ public class BuildingEntity {
         this.street = street;
     }
 
-    // Getter & Setter cho ward
     public String getWard() {
         return ward;
     }
@@ -100,16 +114,30 @@ public class BuildingEntity {
         this.ward = ward;
     }
 
-    // Getter & Setter cho districtid
-//    public Long getDistrictid() {
-//        return districtid;
-//    }
-//
-//    public void setDistrictid(Long districtid) {
-//        this.districtid = districtid;
-//    }
+    public String getDistrict() {
+        return district;
+    }
 
-    // Getter & Setter cho floorArea
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getStructure() {
+        return structure;
+    }
+
+    public void setStructure(String structure) {
+        this.structure = structure;
+    }
+
+    public Long getNumberOfBasement() {
+        return numberOfBasement;
+    }
+
+    public void setNumberOfBasement(Long numberOfBasement) {
+        this.numberOfBasement = numberOfBasement;
+    }
+
     public Long getFloorArea() {
         return floorArea;
     }
@@ -118,7 +146,22 @@ public class BuildingEntity {
         this.floorArea = floorArea;
     }
 
-    // Getter & Setter cho rentPrice
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
     public Long getRentPrice() {
         return rentPrice;
     }
@@ -127,16 +170,14 @@ public class BuildingEntity {
         this.rentPrice = rentPrice;
     }
 
-    // Getter & Setter cho serviceFee
-    public String getServiceFee() {
+    public Long getServiceFee() {
         return serviceFee;
     }
 
-    public void setServiceFee(String serviceFee) {
+    public void setServiceFee(Long serviceFee) {
         this.serviceFee = serviceFee;
     }
 
-    // Getter & Setter cho brokerageFee
     public Long getBrokerageFee() {
         return brokerageFee;
     }
@@ -145,7 +186,14 @@ public class BuildingEntity {
         this.brokerageFee = brokerageFee;
     }
 
-    // Getter & Setter cho managerName
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
+    }
+
     public String getManagerName() {
         return managerName;
     }
@@ -154,7 +202,6 @@ public class BuildingEntity {
         this.managerName = managerName;
     }
 
-    // Getter & Setter cho managerPhoneNumber
     public String getManagerPhone() {
         return managerPhone;
     }
@@ -163,20 +210,27 @@ public class BuildingEntity {
         this.managerPhone = managerPhone;
     }
 
-	public String getDirection() {
-		return direction;
-	}
+    public List<RentAreaEntity> getRentAreaEntities() {
+        return rentAreaEntities;
+    }
 
-	public void setDirection(String direction) {
-		this.direction = direction;
-	}
+    public void setRentAreaEntities(List<RentAreaEntity> rentAreaEntities) {
+        this.rentAreaEntities = rentAreaEntities;
+    }
 
-	public String getLevel() {
-		return level;
-	}
+//    public String getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(String image) {
+//        this.image = image;
+//    }
 
-	public void setLevel(String level) {
-		this.level = level;
-	}
+    public List<UserEntity> getUserEntities() {
+        return userEntities;
+    }
 
+    public void setUserEntities(List<UserEntity> userEntities) {
+        this.userEntities = userEntities;
+    }
 }

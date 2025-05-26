@@ -72,7 +72,7 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="">
-                    <a href='/admin/builiding-list'>
+                    <a href='/admin/building-list'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         Danh sách toà nhà
                     </a>
