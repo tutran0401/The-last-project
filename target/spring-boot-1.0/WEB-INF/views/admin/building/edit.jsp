@@ -249,7 +249,7 @@
     }
 
     $('#btnCancel').click(function () {
-        window.location.href="/admin/builiding-list";
+        window.location.href="/admin/building-list";
     });
 
 </script>

@@ -22,7 +22,7 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom
     @PersistenceContext
     private EntityManager entityManager;
 
-
+    @Override
     public List<BuildingEntity> findAll (BuildingSearchBuilder buildingSearchBuilder, Pageable pageable)
     {
         StringBuilder sql = new StringBuilder
@@ -47,13 +47,13 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom
         return query.getResultList();
     }
 
-//    @Override
-//    public int countTotalItem(BuildingSearchResponse buildingSearchResponse)
-//    {
-//        String sql = buildQueryFilter(buildingSearchResponse.getId());
-//        Query query = entityManager.createNativeQuery(sql);
-//        return query.getResultList().size();
-//    }
+    @Override
+    public int countTotalItem(BuildingSearchResponse buildingSearchResponse)
+    {
+        String sql = buildQueryFilter(buildingSearchResponse.getId());
+        Query query = entityManager.createNativeQuery(sql);
+        return query.getResultList().size();
+    }
 
     private String buildQueryFilter(Long id) {
         String sql = "SELECT * FROM building b where b.id = " + id;

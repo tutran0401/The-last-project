@@ -74,5 +74,12 @@ public class BuildingServiceImpl implements IBuildingService {
 
         return res;
     }
+    @Override
+    public int countTotalItem(List<BuildingSearchResponse> list)
+    {
+        int res = 0;
+        for(BuildingSearchResponse it : list) res += buildingRepository.countTotalItem(it);
+        return res;
+    }
 
 }

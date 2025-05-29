@@ -194,7 +194,7 @@
                         </div>
                     </div>
 
-                    <security:authorize access="hasRole('MANAGER')">
+                    <!-- <security:authorize access="hasRole('MANAGER')"> -->
                         <div class="pull-right">
                             <a href="/admin/building-edit">
                                 <button class="btn btn-info" title="Thêm tòa nhà">
@@ -222,7 +222,7 @@
                                 </svg>
                             </button>
                         </div>
-                    </security:authorize>
+                    <!-- </security:authorize> -->
                 </div>
             </div>
 

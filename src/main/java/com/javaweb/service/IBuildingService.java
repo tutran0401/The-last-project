@@ -10,6 +10,7 @@ public interface IBuildingService {
 //    ResponseDTO listStaffs(Long buildingId);
     List<BuildingSearchResponse>findAll(BuildingSearchRequest buildingSearchRequest, Pageable pageable);
     ResponseDTO listStaffs(Long buildingId);
+    int countTotalItem(List<BuildingSearchResponse> list);
 
 
 }
