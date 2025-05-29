@@ -17,18 +17,20 @@
 
 ## 📁 Cấu Trúc Dự Án
 
+```
 ├── src/
-│ ├── main/
-│ │ ├── java/ # Mã nguồn Java
-│ │ ├── resources/ # Tệp cấu hình
-│ │ └── webapp/ # Tài nguyên web và giao diện JSP
-│ │ └── WEB-INF/
-│ │ └── views/
-│ │ ├── admin/ # Giao diện quản trị
-│ │ └── web/ # Giao diện người dùng
+│   ├── main/
+│   │   ├── java/         # Mã nguồn Java
+│   │   ├── resources/    # Tệp cấu hình
+│   │   └── webapp/       # Tài nguyên web và giao diện JSP
+│   │       └── WEB-INF/
+│   │           └── views/
+│   │               ├── admin/       # Giao diện quản trị
+│   │               └── web/         # Giao diện người dùng
 ├── database/
-│ └── insert_database.sql # Script khởi tạo cơ sở dữ liệu
-└── pom.xml # Cấu hình Maven
+│   └── insert_database.sql  # Script khởi tạo cơ sở dữ liệu
+└── pom.xml                  # Cấu hình Maven
+```
 
 ---
 
@@ -53,33 +55,32 @@
 **Xây dựng ứng dụng:**
 ```bash
 mvn clean install
-Chạy ứng dụng:
+```
 
-bash
-Sao chép
-Chỉnh sửa
+**Chạy ứng dụng:**
+```bash
 mvn spring-boot:run
-Ứng dụng sẽ được khởi chạy tại: http://localhost:8080
-🔐 Giao Diện Quản Trị
+```
+
+Ứng dụng sẽ được khởi chạy tại: [http://localhost:8080](http://localhost:8080)
+
+---
+
+## 🔐 Giao Diện Quản Trị
+
 Giao diện quản trị bao gồm:
+- Danh sách người dùng
+- Chỉnh sửa thông tin người dùng
+- Quản lý hồ sơ cá nhân
+- Các chức năng quản lý tòa nhà khác
 
-Danh sách người dùng
+---
 
-Chỉnh sửa thông tin người dùng
+## 👤 Giao Diện Người Dùng
 
-Quản lý hồ sơ cá nhân
-
-Các chức năng quản lý tòa nhà khác
-
-👤 Giao Diện Người Dùng
 Giao diện người dùng bao gồm:
-
-Trang chủ
-
-Trang giới thiệu về dự án SkyLand
-
-Trang tin tức
-
-Trang liên hệ
-
-Danh sách bất động sản
+- Trang chủ
+- Trang giới thiệu về dự án SkyLand
+- Trang tin tức
+- Trang liên hệ
+- Danh sách bất động sản
